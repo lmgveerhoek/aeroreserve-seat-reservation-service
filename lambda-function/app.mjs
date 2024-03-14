@@ -48,7 +48,10 @@ const zeebeClient = new ZBClient({
 	},
 })
 
-const worker = zeebeClient.createWorker('reserve-seats', reserveSeatsHandler)
+const worker = zeebeClient.createWorker({
+  taskType: 'reserve-seats', 
+  taskHandler: reserveSeatsHandler
+})
 
 function reserveSeatsHandler(job, _, worker) {  
   console.log("\n\n Reserve seats now...");
