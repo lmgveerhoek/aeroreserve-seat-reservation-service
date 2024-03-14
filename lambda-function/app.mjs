@@ -12,15 +12,11 @@
  */
 
 import { v4 as uuidv4 } from 'uuid';
-
-// Use this code snippet in your app.
-// If you need more information about configurations or implementing the sample code, visit the AWS docs:
-// https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/getting-started.html
-
 import {
   SecretsManagerClient,
   GetSecretValueCommand,
 } from "@aws-sdk/client-secrets-manager";
+import { ZBClient } from "zeebe-node";
 
 const secret_name = "zeebe-credentials";
 
@@ -43,12 +39,6 @@ try {
 }
 
 const secret = response.SecretString;
-
-// Your code goes here
-////////////////////////////////////
-// FAKE SEAT RESERVATION SERVICE
-////////////////////////////////////
-import { ZBClient } from "zeebe-node";
 
 const zeebeClient = new ZBClient({
 	camundaCloud: {
@@ -85,7 +75,7 @@ export const lambdaHandler = async (event, context) => {
           "Content-Type": "application/json"
       },
       body: JSON.stringify({
-          message: "Serverless fucntion executed successfully!"
+          message: "Serverless function executed successfully!"
       })
     };
 
