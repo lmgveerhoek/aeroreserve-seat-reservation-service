@@ -55,11 +55,10 @@ function reserveSeatsHandler(job, _, worker) {
   console.log(job);
 
   // Do the real reservation
-  // TODO: Fake some results! Fake an error (when exactly?)
   if ("seats" !== job.variables.simulateBookingFailure) {
     console.log("Successul :-)");
     return job.complete({
-        reservationId: "1234",
+        reservationId: uuidv4(),
       });
   } else {
     console.log("ERROR: Seats could not be reserved!");
