@@ -22,6 +22,9 @@ Resources:
     Properties:
       CodeUri: lambda-function/
       Handler: app.lambdaHandler
+      Policies: 
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: "arn:aws:secretsmanager:eu-north-1:058264113652:secret:zeebe-credentials-K9HCzG"
       Runtime: nodejs20.x
       Architectures:
       - x86_64
