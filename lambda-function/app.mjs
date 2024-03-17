@@ -38,14 +38,10 @@ try {
   throw error;
 }
 
-const secret = response.SecretString;
+const zebeeCredentials = JSON.parse(response.SecretString);
 
 const zeebeClient = new ZBClient({
-	camundaCloud: {
-		clientId: secret.ZEEBE_CLIENT_ID,
-		clientSecret: secret.ZEEBE_CLIENT_SECRET,
-		clusterId: secret.ZEEBE_CLUSTER_ID,
-	},
+	camundaCloud: zebeeCredentials,
 })
 
 const worker = zeebeClient.createWorker({
@@ -77,7 +73,7 @@ export const lambdaHandler = async (event, context) => {
           "Content-Type": "application/json"
       },
       body: JSON.stringify({
-          message: "Serverless function executed successfully!"
+          message: "Serverless function woken-up successfully!"
       })
     };
 
