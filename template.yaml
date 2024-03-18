@@ -25,6 +25,9 @@ Resources:
       Policies: 
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: "arn:aws:secretsmanager:eu-north-1:058264113652:secret:zeebe-credentials-K9HCzG"
+      Environment:
+        Variables:
+          HOME: /tmp
       Runtime: nodejs20.x
       Architectures:
       - x86_64
