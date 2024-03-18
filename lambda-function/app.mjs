@@ -44,10 +44,7 @@ const zeebeClient = new ZBClient({
 	camundaCloud: zebeeCredentials,
 })
 
-const worker = zeebeClient.createWorker({
-  taskType: 'reserve-seats', 
-  taskHandler: reserveSeatsHandler
-})
+let worker; 
 
 function reserveSeatsHandler(job, _, worker) {  
   console.log("\n\n Reserve seats now...");
@@ -66,6 +63,13 @@ function reserveSeatsHandler(job, _, worker) {
 }
 
 export const lambdaHandler = async (event, context) => {
+
+    if (!worker) {
+      worker = await zeebeClient.createWorker({
+        taskType: "reserve-seats",
+        taskHandler: reserveSeatsHandler,
+      });
+    }
 
     const response = {
       statusCode: 200,
