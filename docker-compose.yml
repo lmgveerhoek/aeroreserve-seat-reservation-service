@@ -1,0 +1,17 @@
+version: '3'
+services:
+  aeroreserve-seat-reservation-service:
+    image: ${DOCKER_REGISTRY_URL}/aeroreserve-seat-reservation-service:${SEAT_RESERVATION_SERVICE_IMAGE_VERSION}
+    container_name: aeroreserve-seat-reservation-service
+    build: .
+    restart: unless-stopped
+    environment:
+      - ZEEBE_ADDRESS=${ZEEBE_ADDRESS}
+      - ZEEBE_CLIENT_ID=${ZEEBE_CLIENT_ID}
+      - ZEEBE_CLIENT_SECRET=${ZEEBE_CLIENT_SECRET}
+      - ZEEBE_AUTHORIZATION_SERVER_URL=${ZEEBE_AUTHORIZATION_SERVER_URL}
+      - ZEEBE_TOKEN_AUDIENCE=${ZEEBE_TOKEN_AUDIENCE}
+      - CAMUNDA_CLUSTER_ID=${CAMUNDA_CLUSTER_ID}
+      - CAMUNDA_CLUSTER_REGION=${CAMUNDA_CLUSTER_REGION}
+      - CAMUNDA_CREDENTIALS_SCOPES=${CAMUNDA_CREDENTIALS_SCOPES}
+      - CAMUNDA_OAUTH_URL=${CAMUNDA_OAUTH_URL}

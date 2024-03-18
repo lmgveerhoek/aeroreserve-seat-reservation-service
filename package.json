@@ -1,0 +1,22 @@
+{
+	"name": "aeroreserve-seats-reservation-service",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"main": "dist/app.js",
+	"scripts": {
+		"build": "tsc",
+		"start": "tsc && node dist/app.js",
+		"dev": "tsc-watch --onSuccess \"node dist/app.js\""
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@aws-sdk/client-secrets-manager": "^3.535.0",
+		"dotenv": "^8.6.0",
+		"typescript": "^5.3.3",
+		"uuid": "^8.3.2",
+		"zeebe-node": "2.4.0"
+	}
+}
