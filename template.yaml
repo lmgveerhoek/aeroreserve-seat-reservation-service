@@ -31,6 +31,12 @@ Resources:
       Runtime: nodejs20.x
       Architectures:
       - x86_64
+      VpcConfig:
+        SubnetIds: 
+          - "subnet-08dff36a37f341d13"
+          - "subnet-02ef1c7c20f7ff38b"
+        SecurityGroupIds:
+          - "sg-08d24edc6e218fdd2"
       Events:
         AeroReserveSeatReservationService:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
