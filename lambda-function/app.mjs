@@ -18,7 +18,7 @@ import {
 } from "@aws-sdk/client-secrets-manager";
 import { ZBClient } from "zeebe-node";
 
-const secret_name = "arn:aws:secretsmanager:eu-north-1:058264113652:secret:zeebe-credentials-K9HCzG";
+const secret_name = "zeebe-credentials";
 
 const client = new SecretsManagerClient({
   region: "eu-north-1",
@@ -44,7 +44,10 @@ const zeebeClient = new ZBClient({
 	camundaCloud: zebeeCredentials,
 })
 
-let worker; 
+const worker = zeebeClient.createWorker({
+  taskType: 'reserve-seats', 
+  taskHandler: reserveSeatsHandler
+})
 
 function reserveSeatsHandler(job, _, worker) {  
   console.log("\n\n Reserve seats now...");
@@ -64,20 +67,14 @@ function reserveSeatsHandler(job, _, worker) {
 
 export const lambdaHandler = async (event, context) => {
 
-    if (!worker) {
-      worker = await zeebeClient.createWorker({
-        taskType: "reserve-seats",
-        taskHandler: reserveSeatsHandler,
-      });
-    }
-
     const response = {
       statusCode: 200,
       headers: {
           "Content-Type": "application/json"
       },
       body: JSON.stringify({
-          message: "Serverless function woken-up successfully!"
+          // Also mention the status of the worker
+          message: `${worker.taskType} worker is running...`
       })
     };
 
