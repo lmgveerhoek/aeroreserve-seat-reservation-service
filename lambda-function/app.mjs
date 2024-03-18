@@ -18,7 +18,7 @@ import {
 } from "@aws-sdk/client-secrets-manager";
 import { ZBClient } from "zeebe-node";
 
-const secret_name = "zeebe-credentials";
+const secret_name = "arn:aws:secretsmanager:eu-north-1:058264113652:secret:zeebe-credentials-K9HCzG";
 
 const client = new SecretsManagerClient({
   region: "eu-north-1",
