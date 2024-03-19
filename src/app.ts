@@ -7,7 +7,7 @@ import {
   GetSecretValueCommand,
 } from "@aws-sdk/client-secrets-manager";
 import { ZBClient } from "zeebe-node";
-require("dotenv").config();
+import 'dotenv/config'
 
 // const secret_name = "zeebe-credentials";
 

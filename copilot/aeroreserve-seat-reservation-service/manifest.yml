@@ -49,10 +49,10 @@ network:
 secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
 #  GITHUB_TOKEN: GITHUB_TOKEN  # The key is the name of the environment variable, the value is the name of the SSM parameter.
   # zeebe-credentials: 'arn:aws:secretsmanager:eu-north-1:058264113652:secret:zeebe-credentials-K9HCzG'
-  ZEEBE_ADDRESS: ZEEBE_ADDRESS
-  ZEEBE_CLIENT_ID: CLIENT_ID
-  ZEEBE_CLIENT_SECRET: CLIENT_SECRET
-  ZEEBE_AUTHORIZATION_SERVER_URL: AUTHORIZATION_SERVER_URL
+  ZEEBE_ADDRESS: /copilot/${COPILOT_APPLICATION_NAME}/${COPILOT_ENVIRONMENT_NAME}/secrets/ZEEBE_ADDRESS
+  ZEEBE_CLIENT_ID: /copilot/${COPILOT_APPLICATION_NAME}/${COPILOT_ENVIRONMENT_NAME}/secrets/CLIENT_ID
+  ZEEBE_CLIENT_SECRET: /copilot/${COPILOT_APPLICATION_NAME}/${COPILOT_ENVIRONMENT_NAME}/secrets/CLIENT_SECRET
+  ZEEBE_AUTHORIZATION_SERVER_URL: /copilot/${COPILOT_APPLICATION_NAME}/${COPILOT_ENVIRONMENT_NAME}/secrets/AUTHORIZATION_SERVER_URL
 
 # You can override any of the values defined above by environment.
 #environments:
