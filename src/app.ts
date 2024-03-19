@@ -2,10 +2,6 @@
 // FAKE SEAT RESERVATION SERVICE
 ////////////////////////////////////
 import { v4 as uuidv4 } from 'uuid';
-import {
-  SecretsManagerClient,
-  GetSecretValueCommand,
-} from "@aws-sdk/client-secrets-manager";
 import { ZBClient } from "zeebe-node";
 import 'dotenv/config'
 
