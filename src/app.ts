@@ -7,32 +7,31 @@ import {
   GetSecretValueCommand,
 } from "@aws-sdk/client-secrets-manager";
 import { ZBClient } from "zeebe-node";
+require("dotenv").config();
 
-const secret_name = "zeebe-credentials";
+// const secret_name = "zeebe-credentials";
 
-const client = new SecretsManagerClient({
-  region: "eu-north-1",
-});
+// const client = new SecretsManagerClient({
+//   region: "eu-north-1",
+// });
 
-let response;
+// let response;
 
-try {
-  response = await client.send(
-    new GetSecretValueCommand({
-      SecretId: secret_name,
-    })
-  );
-} catch (error) {
-  // For a list of exceptions thrown, see
-  // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-  throw error;
-}
+// try {
+//   response = await client.send(
+//     new GetSecretValueCommand({
+//       SecretId: secret_name,
+//     })
+//   );
+// } catch (error) {
+//   // For a list of exceptions thrown, see
+//   // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+//   throw error;
+// }
 
-const zebeeCredentials = JSON.parse(response.SecretString);
+// const zebeeCredentials = JSON.parse(response.SecretString);
 
-const zeebeClient = new ZBClient({
-	camundaCloud: zebeeCredentials,
-})
+const zeebeClient = new ZBClient();
 
 const worker = zeebeClient.createWorker({
   taskType: 'reserve-seats', 
