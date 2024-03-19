@@ -9,28 +9,6 @@ import {
 import { ZBClient } from "zeebe-node";
 import 'dotenv/config'
 
-// const secret_name = "zeebe-credentials";
-
-// const client = new SecretsManagerClient({
-//   region: "eu-north-1",
-// });
-
-// let response;
-
-// try {
-//   response = await client.send(
-//     new GetSecretValueCommand({
-//       SecretId: secret_name,
-//     })
-//   );
-// } catch (error) {
-//   // For a list of exceptions thrown, see
-//   // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-//   throw error;
-// }
-
-// const zebeeCredentials = JSON.parse(response.SecretString);
-
 const zeebeClient = new ZBClient();
 
 const worker = zeebeClient.createWorker({
