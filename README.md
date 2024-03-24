@@ -1,51 +1,98 @@
 # AeroReserve Seat Reservation Service
 
-This is the README file for the AeroReserve Seat Reservation Service project.
+This repository contains the source code for the AeroReserve Seat Reservation Service. This service is responsible for managing seat reservations for the AeroReserve application. It is built using Node.js and contains a Zeebe worker that listens for messages from the Ticket Booking Service. 
 
-## Prerequisites
+The application is deployed to AWS using AWS Copilot.
+
+## Requirements
 
 Before you begin, ensure that you have the following installed:
 
 - Node.js
-- Docker
+- AWS CLI
+- AWS Copilot CLI
 
-## Getting Started
+This application needs to be able to connect to the following services:
+- Ticket Booking Service
 
-To get started with the AeroReserve Seat Reservation Service, follow these steps:
+Furthermore, the following parameters should be present in the AWS Systems Manager Parameter Store, so that the application can connect to the Zeebe cluster and the Ticket Booking Service. The parameters should be stored in the following paths:
+- /copilot/aeroreserve/prod/secrets/AUTHORIZATION_SERVER_URL
+- /copilot/aeroreserve/prod/secrets/CLIENT_ID
+- /copilot/aeroreserve/prod/secrets/CLIENT_SECRET	
+- /copilot/aeroreserve/prod/secrets/CLUSTER_ID	
+- /copilot/aeroreserve/prod/secrets/CLUSTER_REGION
+- /copilot/aeroreserve/prod/secrets/ZEEBE_ADDRESS
 
-1. Clone the repository:
+To test the application locally, you can create a `.env` file in the root directory of the project with the following parameters:
 
-   ```bash
-   git clone git@ssh.dev.azure.com:v3/AeroReserve/AeroReserve/aeroreserve-seat-reservation-service
-   ````
+``` 
+  ZEEBE_ADDRESS =
+  ZEEBE_CLIENT_ID =
+  ZEEBE_CLIENT_SECRET =
+  ZEEBE_AUTHORIZATION_SERVER_URL =
+```
 
-2. Make your .env file ready:
+## Running the Application through Node.js
 
-    ```bash
-    cp .env.example .env
-    ````
+To run the application, you can use the following commands:
 
-    Make sure you fill all environment variables with the right credentials
+```bash
+npm install
+npm start
+```
 
+## Running the Application through Docker
 
-3. Build Docker Image
+1. Build Docker Image
 
    ```bash
    docker build -t [IMAGE_NAME] .
    ````
 
-4. Run Docker Image
+2. Run Docker Image
 
    ```bash
     docker run -d --name [CONTAINER_NAME] --volume ./.env:/app/.env [IMAGE_NAME]
    ````
 
-5. (Optional) Docker logs
+3. (Optional) Docker logs
 
    ```bash
     docker logs [CONTAINER_NAME]
    ````
 
+## Deploying the Application to AWS
 
+This application is deployed to AWS Fargate which is a serverless compute engine for containers that runs and scales containers without having to manage servers or clusters.
+
+1. Ensure you have the AWS Copilot CLI installed and configured with valid credentials.
+
+2. From the root directory of the project, run the following command:
+
+```bash
+copilot deploy
+```
+
+This will build and deploy the application to Fargate. It will automatically create the necessary ECS cluster, task definition, and services.
+
+3. Specify the environment (test, prod etc.) as a parameter to target different environments.
+
+4. The application will be available at the load balancer URL returned after successful deployment.
+
+Logs can be viewed in CloudWatch Logs and metrics in CloudWatch. Auto scaling of services is also supported based on CPU or memory metrics.
+
+5. Create the pipeline for the application:
+
+```bash
+copilot pipeline deploy
+```
+
+This will create a CodePipeline that will automatically deploy the application when changes are pushed to the repository.
+
+5. To delete the application, run the following command:
+
+```bash
+copilot app delete
+```
 
 
